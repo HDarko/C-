@@ -3,7 +3,7 @@
 
 
 GenericPlayer::GenericPlayer(std::string name )
-	:m_Name{ name }, m_Hand{}
+	:m_Name{ name }, m_Hand{new Hand()}
 {
 }
 
