@@ -11,7 +11,7 @@ std::ostream& operator<<(std::ostream& os, const Hand& hand)
 	{
 		for (pCard = hand.m_Cards.begin(); pCard != hand.m_Cards.end(); ++pCard)
 		{
-			os <<"\n"<< *(*pCard) << "\t";
+			os <<"\t"<< *(*pCard) << "\t";
 		}
 	}
 
