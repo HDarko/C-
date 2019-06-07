@@ -17,12 +17,12 @@ Card::Card(Rank r, Suit s, bool isDown)
 
 std::ostream& operator<<(std::ostream& os, const Card& card)
 {
-	 std::string RANKS [14] = { "0","A","2","3","4","5","6",
-	"7","8","9","10","J","Q","K" };
-	 std::string SUITS [4] = { "H","C","S","D" };
+	 std::string RANKS [14] = { "0","Ace of","2 of","3 of","4 of","5 of","6 of",
+	"7 of","8 of","9 of","10 of","Jack of","Queen of","King of" };
+	 std::string SUITS [4] = { " Hearts"," Clubs"," Spades"," Diamonds" };
 	if (card.m_isDown)
 	{
-		os << "XX";
+		os << "Unknown Card";
 	}
 	else
 	{
