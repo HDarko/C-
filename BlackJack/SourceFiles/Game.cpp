@@ -27,26 +27,33 @@ void Game::play()
 {
 	//Deal initial 2 cards to everyone
 	std::vector<Player>::iterator pPlayer;
-	for (int i = 0; i < 2; ++i)
+
 	{
 		for (pPlayer = m_Players.begin(); pPlayer != m_Players.end(); ++pPlayer)
 		{
-			std::cout << (*pPlayer).getName();
+			std::cout << (*pPlayer).getName()<< " gets 2 cards\n";
+			for (int i = 0; i < 2; ++i)
+			{
+				m_Deck.Deal((*pPlayer).m_Hand);
+			}
 			//auto hand = (*pPlayer)->m_Hand;
-			m_Deck.Deal((*pPlayer).m_Hand);
+			
 		}
-		
+		std::cout << "\nDealer gets 2 cards\n";
+		m_Deck.Deal((m_Dealer).m_Hand);
 		m_Deck.Deal((m_Dealer).m_Hand);
 	}
+
+	
 	//Hide dealer's first card
 	m_Dealer.FlipFirstCard();
 	//display everyones hand
-	std::cout << "\nThe Dealer has:\n";
-	std::cout << (m_Dealer).m_Hand;
+	std::cout << "\nRound start:\nDealer has:\n";
+	std::cout << *((m_Dealer).m_Hand);
 	for (pPlayer = m_Players.begin(); pPlayer != m_Players.end(); ++pPlayer)
 	{
 		std::cout <<"\n"<<pPlayer->getName() << " has:\n"<<
-			(*pPlayer).m_Hand <<"\n";
+			*((*pPlayer).m_Hand) <<"\n";
 
 	}
 	//Everyone should play their round
@@ -58,7 +65,7 @@ void Game::play()
 	//Reveal Dealer's first card and play Dealer round
 	m_Dealer.FlipFirstCard();
 	std::cout << "\nThe Dealer has:\n";
-	std::cout << m_Dealer.m_Hand;
+	std::cout << *(m_Dealer.m_Hand);
 	playRound(m_Dealer);
 
 	checkWinner();
@@ -72,8 +79,8 @@ void Game::playRound(Player& player)
 	while (player.isHitting())
 	{
 		m_Deck.Deal(player.m_Hand);
-		std::cout <<"\nCurrent Hand:\n "<< player.m_Hand;
-		std::cout << "current value:" << player.m_Hand->GetTotal()<<"\n";
+		std::cout <<"\nCurrent Hand:\n "<< *(player.m_Hand);
+		std::cout << "\nWith a current value of " << player.m_Hand->GetTotal()<<"\n";
 		if (player.isBusted())
 		{
 			player.Burst();
@@ -87,7 +94,7 @@ void Game::playRound(Dealer& dealer)
 	while (dealer.isHitting())
 	{
 		m_Deck.Deal(dealer.m_Hand);
-		std::cout <<"\n"<< dealer.m_Hand;
+		std::cout <<"\n"<< *(dealer.m_Hand);
 	}
 }
 
@@ -113,6 +120,6 @@ void Game::checkWinner()
 		}
 	}
 
-	std::cout << "The winner is " << winner;
+	std::cout << "\nThe winner is " << winner << "\nFinal score: " << hScore<<"\n";
 
 }
